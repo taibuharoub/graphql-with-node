@@ -17,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/taibuharoub/graphql-with-node/issues"
   },
-  "homepage": "https://github.com/taibuharoub/graphql-with-node#readme"
+  "homepage": "https://github.com/taibuharoub/graphql-with-node#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express-graphql": "^0.12.0",
+    "express-validator": "^6.12.0",
+    "graphql": "^15.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.14",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.2"
+  }
 }
