@@ -55,6 +55,7 @@ app.use(
   graphqlHTTP({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
+    graphiql: true
   })
 );
 
@@ -67,7 +68,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect("mongodb://localhost:27017/websocketsDB", {
+  .connect("mongodb://localhost:27017/graphqlDB", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
