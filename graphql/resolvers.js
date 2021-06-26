@@ -45,7 +45,7 @@ module.exports = {
       error.code = 401;
       throw error;
     }
-    const isEqual = bcrypt.compare(password, user.password);
+    const isEqual = await bcrypt.compare(password, user.password);
     if (!isEqual) {
       const error = new Error("Password is incorrect.");
       error.code = 401;
