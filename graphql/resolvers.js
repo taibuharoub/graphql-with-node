@@ -64,9 +64,9 @@ module.exports = {
   },
   createPost: async function ({ postInput }, req) {
     if (!req.isAuth) {
-        const error = new Error("Not Authenicated!");
-        error.code = 401;
-        throw error; 
+      const error = new Error("Not Authenicated!");
+      error.code = 401;
+      throw error;
     }
     const errors = [];
     if (
@@ -88,7 +88,7 @@ module.exports = {
       throw error;
     }
     const user = await User.findById(req.userId);
-    if(!user) {
+    if (!user) {
       const error = new Error("Invalid User.");
       error.code = 401;
       throw error;
@@ -97,7 +97,7 @@ module.exports = {
       title: postInput.title,
       content: postInput.content,
       imageUrl: postInput.imageUrl,
-      creator: user
+      creator: user,
     });
     const createdPost = await post.save();
     //Add post to users' post
@@ -108,6 +108,26 @@ module.exports = {
       _id: createdPost._id.toString(),
       createdAt: createdPost.createdAt.toISOString(),
       updatedAt: createdPost.updatedAt.toISOString(),
+    };
+  },
+  posts: async function (args, req) {
+    if (!req.isAuth) {
+      const error = new Error("Not Authenicated!");
+      error.code = 401;
+      throw error;
+    }
+    const totalPosts = await Post.find().countDocuments();
+    const posts = await Post.find().sort({ createdAt: -1 }).populate("creator");
+    return {
+      posts: posts.map((p) => {
+        return {
+          ...p._doc,
+          _id: p._id.toString(),
+          createdAt: p.createdAt.toISOString(),
+          updatedAt: p.updatedAt.toISOString(),
+        };
+      }),
+      totalPosts: totalPosts,
     };
   },
 };
