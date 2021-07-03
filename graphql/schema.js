@@ -42,10 +42,11 @@ module.exports = buildSchema(`
         imageUrl: String!
     }
 
-    type RootQuey {
+    type RootQuery {
         login(email: String!, password: String!): AuthData!
         posts(page: Int): PostData!
         post(id: ID!): Post!
+        user: User!
     }
 
     type RootMutation {
@@ -53,10 +54,11 @@ module.exports = buildSchema(`
         createPost(postInput: PostInputData): Post!
         updatePost(id: ID!, postInput: PostInputData): Post!
         deletePost(id: ID!): Boolean
+        updateStatus(status: String!): User!
     }
 
     schema {
-        query: RootQuey
+        query: RootQuery
         mutation: RootMutation
     }
 `);
